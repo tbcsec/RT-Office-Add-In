@@ -58,6 +58,27 @@ function btnDisconnectService(event) {
   event.completed();
 }
 
+ function btnGithubDownload(event) {
+  const url = 'https://raw.githubusercontent.com/username/repository/branch/filename'; // Replace with actual URL
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok.');
+    }
+    const fileContent = await response.text();
+    console.log("Downloaded file content:", fileContent);
+    // You can further process the file content or display it in Excel
+    Office.context.ui.displayDialogAsync(fileContent);
+  } catch (error) {
+    console.error('Error downloading file:', error);
+  }
+}
+
+ function btnExploitDB(event) {
+  const exploitDbUrl = 'https://www.exploit-db.com';
+  Office.context.ui.displayDialogAsync(exploitDbUrl, { height: 50, width: 50 });
+ }
+
  function btnInsertData(event) {
   console.log("Insert data button pressed");
   // Mock code that pretends to insert data from a data source
@@ -139,3 +160,5 @@ Office.actions.associate("btnEnableAddinStart", btnEnableAddinStart);
 Office.actions.associate("btnDisableAddinStart", btnDisableAddinStart);
 Office.actions.associate("btnInsertData", btnInsertData);
 Office.actions.associate("btnSumData", btnSumData);
+Office.actions.associate("btnGithubDownload", btnGithubDownload);
+Office.actions.associate("btnExploitDB", btnExploitDB);
